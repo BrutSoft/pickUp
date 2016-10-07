@@ -16,7 +16,7 @@ export default {
     let newGame = new Game({
       sport: gameReq.sport,
       startTime: gameReq.time,
-      location: 'Stallings',
+      location: 'Stallings', // navigation.geolocation or something
       minPlayers: 6,
       playRequests: 1,
       smsNums: [{smsNum: smsNum}],
@@ -26,13 +26,13 @@ export default {
       .then(foundGame => {
         if (foundGame) {
           console.log('game found ');
-          
+
           if ( helpers.includesPlayer(foundGame, gameReq.smsNum) ) {
             console.error('game already requested.');
             return Promise.resolve(foundGame);
           }
           foundGame.smsNums.push({smsNum: gameReq.smsNum});
-         
+
           foundGame.playRequests += 1
           return Promise.resolve(foundGame);
         } else {
@@ -56,7 +56,7 @@ export default {
           })
         }
         return Promise.resolve(game);
-      })  
+      })
       .then(db.saveGame)
       .then((savedGame) => {
         res.status(201).json(savedGame);
@@ -66,6 +66,6 @@ export default {
         res.status(500).send('error requesting game');
       });
 
-    
+
   }
 }
