@@ -9,23 +9,35 @@ var timeSlots = _.range(17, 23).map(function (hour) {
 angular.module('gameReqForm', ['pickUp.services'])
 .controller('TimeSelectController', function($scope, $location, GameReq, sharedProps) {
     var gameReq = {};
+    $scope.findingLocation = false;
+
     $scope.requestGame = function() {
       console.log('requesting Game');
-      gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
-      gameReq.smsNum = $scope.smsNum;
-      gameReq.sport = $scope.sportInput;
+      $scope.findingLocation = true;
+      helpers.getLocation()
+      .then(function(location) {
 
-      console.log(gameReq);
+        gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
+        gameReq.smsNum = $scope.smsNum;
+        gameReq.sport = $scope.sportInput;
+        gameReq.location = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        };
+        console.log(gameReq);
 
-      GameReq.requestGame(gameReq)
-        .then(function (game) {
-          sharedProps.set(game);
-          $location.path('/games');
-        })
-        .catch(function (error) {
-          console.error('error requesting game ', error);
-        });
+        GameReq.requestGame(gameReq)
+          .then(function (game) {
+            sharedProps.set(game);
+            $location.path('/games');
+          })
+          .catch(function (error) {
+            console.error('error requesting game ', error);
+          });
+      });
     };
+
+
     $scope.data = {
       model: null,
       availableOptions: timeSlots,
