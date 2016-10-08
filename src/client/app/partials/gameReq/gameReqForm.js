@@ -9,28 +9,10 @@ var timeSlots = _.range(17, 23).map(function (hour) {
 angular.module('gameReqForm', ['pickUp.services'])
 .controller('TimeSelectController', function($scope, $location, GameReq, sharedProps) {
     var gameReq = {};
-    $scope.requestGame = function() {
-      console.log('requesting Game');      
-      gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
-      gameReq.smsNum = $scope.smsNum;
-      gameReq.sport = $scope.sportInput;
-      gameReq.location = location
-
-      console.log(gameReq);
-
-      GameReq.requestGame(gameReq)
-        .then(function (game) {
-          sharedProps.set(game);
-          $location.path('/games');
-        })
-        .catch(function (error) {
-          console.error('error requesting game ', error);
-        });
-    };
 
     $scope.getLocation = function() {
-  	  return new Promise(function(resolve, reject) {
-  		  navigator.geolocation.getCurrentPosition(function(position) {
+      return new Promise(function(resolve, reject) {
+        navigator.geolocation.getCurrentPosition(function(position) {
 
           var coordinates = {
             latitude: position.coords.latitude,
@@ -49,6 +31,30 @@ angular.module('gameReqForm', ['pickUp.services'])
         })
       });
     };
+
+    $scope.requestGame = function() {
+      console.log('requesting Game');
+      $scope.getLocation()
+      .then(function(location) {
+        
+        gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
+        gameReq.smsNum = $scope.smsNum;
+        gameReq.sport = $scope.sportInput;
+        gameReq.location = location;
+
+        console.log(gameReq);
+
+        GameReq.requestGame(gameReq)
+          .then(function (game) {
+            sharedProps.set(game);
+            $location.path('/games');
+          })
+          .catch(function (error) {
+            console.error('error requesting game ', error);
+          });
+      });
+    };
+
 
     $scope.data = {
       model: null,

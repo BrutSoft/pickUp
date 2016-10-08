@@ -4,7 +4,6 @@ import userSchema from '../users/userSchema';
 const gameSchema = mongoose.Schema({
   sport: 'string',
   startTime: { type: Date },
-  location: 'Object',
   minPlayers: 'Number',
   playRequests: 'Number',
   smsNums: [userSchema]

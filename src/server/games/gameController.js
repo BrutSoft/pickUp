@@ -16,10 +16,15 @@ export default {
     let newGame = new Game({
       sport: gameReq.sport,
       startTime: gameReq.time,
-      location: gameReq.location,
       minPlayers: 6,
       playRequests: 1,
-      smsNums: [{smsNum: smsNum}],
+      smsNums: [{
+        smsNum: smsNum,
+        location: {
+          latitude: gameReq.location.latitude,
+          longitude: gameReq.location.longitude,
+        }
+      }],
     });
     // check if game exists in DB
     db.getGame(newGame)
