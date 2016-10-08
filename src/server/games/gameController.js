@@ -16,7 +16,7 @@ export default {
     let newGame = new Game({
       sport: gameReq.sport,
       startTime: gameReq.time,
-      location: 'Stallings', // navigation.geolocation or something
+      location: gameReq.location,
       minPlayers: 6,
       playRequests: 1,
       smsNums: [{smsNum: smsNum}],
