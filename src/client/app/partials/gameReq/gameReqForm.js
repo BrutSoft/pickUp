@@ -9,8 +9,10 @@ var timeSlots = _.range(17, 23).map(function (hour) {
 angular.module('gameReqForm', ['pickUp.services'])
 .controller('TimeSelectController', function($scope, $location, GameReq, sharedProps) {
     var gameReq = {};
-
+    $scope.findingLocation = false;
+    
     $scope.getLocation = function() {
+      $scope.findingLocation = true;
       return new Promise(function(resolve, reject) {
         navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -36,7 +38,7 @@ angular.module('gameReqForm', ['pickUp.services'])
       console.log('requesting Game');
       $scope.getLocation()
       .then(function(location) {
-        
+
         gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
         gameReq.smsNum = $scope.smsNum;
         gameReq.sport = $scope.sportInput;
