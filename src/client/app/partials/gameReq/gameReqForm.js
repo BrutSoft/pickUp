@@ -10,39 +10,17 @@ angular.module('gameReqForm', ['pickUp.services'])
 .controller('TimeSelectController', function($scope, $location, GameReq, sharedProps) {
     var gameReq = {};
     $scope.findingLocation = false;
-    
-    $scope.getLocation = function() {
-      $scope.findingLocation = true;
-      return new Promise(function(resolve, reject) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-
-          var coordinates = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-
-          resolve(coordinates);
-
-        }, function(error) {
-          reject(error);
-        }, {
-          // options
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
-        })
-      });
-    };
 
     $scope.requestGame = function() {
       console.log('requesting Game');
-      $scope.getLocation()
+      $scope.findingLocation = true;
+      helpers.getLocation()
       .then(function(location) {
 
         gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
         gameReq.smsNum = $scope.smsNum;
         gameReq.sport = $scope.sportInput;
-        gameReq.location = location;
+        gameReq.location = location.coords;
 
         console.log(gameReq);
 

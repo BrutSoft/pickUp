@@ -13,27 +13,15 @@ window.helpers = {
   },
 
   getLocation: function() {
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
 	  return new Promise(function(resolve, reject) {
-		  navigator.geolocation.getCurrentPosition(function(position) {
-
-        var coordinates = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        };
-
-        resolve(coordinates);
-
-      }, function(error) {
-        reject(error);
-      }, {
-        // options
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      })
+		  navigator.geolocation.getCurrentPosition(resolve, reject, options);
     });
   },
-
 };
 
 })(window);
