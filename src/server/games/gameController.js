@@ -18,6 +18,7 @@ export default {
       startTime: gameReq.time,
       minPlayers: 6,
       playRequests: 1,
+      // locCenter: [coordinates]
       smsNums: [{
         smsNum: smsNum,
         location: {
@@ -36,10 +37,18 @@ export default {
             console.error('game already requested.');
             return Promise.resolve(foundGame);
           }
-          foundGame.smsNums.push({smsNum: gameReq.smsNum});
 
-          foundGame.playRequests += 1
-          return Promise.resolve(foundGame);
+          // if user location within radius of game center
+          let location = req.body.location;
+          if (helpers.isInRange(location, foundGame.locCenter, 10)) {
+
+            foundGame.smsNums.push({smsNum: gameReq.smsNum});
+            foundGame.playRequests += 1
+            // caluclate new game center
+            foundGame.locCenter = helpers.getNewCenterLoc(foundGame.smsNums);
+            return Promise.resolve(foundGame);
+          }
+
         } else {
           console.log('game not found. using newGame ');
           return Promise.resolve(newGame);
