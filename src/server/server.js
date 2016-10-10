@@ -24,6 +24,14 @@ console.log(`client directory: ${clientDir}`)
 import User from './mongoose/models/users';
 app.use(passport.initialize());
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 passport.use(new localStrategy(
   function(username, password, done) {
     User.findOne({username: username}, function (err, user) {
@@ -53,6 +61,7 @@ app.post('/register', function(req, res) {
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
+    console.log(err, user, info);
     if (err) {
       return next(err);
     }
@@ -62,6 +71,7 @@ app.post('/login', function(req, res, next) {
       });
     }
     req.logIn(user, function(err) {
+      console.log('req.logIn', err)
       if (err) {
         return res.status(500).json({
           err: 'Could not log in user'
