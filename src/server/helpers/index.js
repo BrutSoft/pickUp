@@ -20,7 +20,6 @@ const helpers = {
 
   includesPlayer: (game, smsNum) => game.smsNums.reduce((included, smsObj) => {
     smsNum = helpers.phone(smsNum);
-    console.log('smsNum = ', smsNum)
     return smsObj.smsNum === smsNum || included;
   }, false),
 
@@ -33,13 +32,11 @@ const helpers = {
   phone: num => phone(num)[0],
 
   isInRange: (location, center, radius) => {
-    return (geolib.getDistance(location, center) < radius)
+    return (geolib.getDistance(location, center) < radius);
   },
 
   getNewCenterLoc: smsNums => {
-    console.log('smsNums', smsNums);
     let locations = smsNums.map(smsNum => smsNum.location);
-    console.log('locations', locations)
     return geolib.getCenter(locations);
   },
 
