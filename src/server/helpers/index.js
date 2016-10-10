@@ -1,6 +1,7 @@
 import moment from 'moment';
 import crypto from 'crypto';
 import phone from 'phone';
+import geolib from 'geolib';
 
 const helpers = {
   createGameTime: (reqTime) => {
@@ -18,6 +19,7 @@ const helpers = {
   hasEnoughPlayers: game => game.playRequests === game.minPlayers,
 
   includesPlayer: (game, smsNum) => game.smsNums.reduce((included, smsObj) => {
+    smsNum = helpers.phone(smsNum);
     return smsObj.smsNum === smsNum || included;
   }, false),
 
@@ -28,6 +30,15 @@ const helpers = {
   },
 
   phone: num => phone(num)[0],
+
+  isInRange: (location, center, radius) => {
+    return (geolib.getDistance(location, center) < radius);
+  },
+
+  getNewCenterLoc: smsNums => {
+    let locations = smsNums.map(smsNum => smsNum.location);
+    return geolib.getCenter(locations);
+  },
 
 };
 

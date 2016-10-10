@@ -1,10 +1,22 @@
-var timeSlots = _.range(17, 23).map(function (hour) {
-  return {
-    id: hour.toString(),
-    hour: hour,
-    name: moment(hour, 'hh').format('h:mma')
-  };
-});
+// timeslot constructor
+var now = Math.min(moment().get('hour'), 23);
+var rangeStart = Math.max(now, 17);
+var timeSlots;
+if (rangeStart !== 23) {
+  timeSlots = _.range(rangeStart, 23).map(function (hour) {
+    return {
+      id: hour.toString(),
+      hour: hour,
+      name: moment(hour, 'hh').format('h:mma')
+    };
+  });
+} else {
+  timeSlots = [{
+    id: '0',
+    hour: null,
+    name: 'No more available times. Try again tomorrow!'
+  }]
+}
 
 angular.module('gameReqForm', ['pickUp.services'])
 .controller('TimeSelectController', function($scope, $location, GameReq, sharedProps) {
@@ -34,6 +46,8 @@ angular.module('gameReqForm', ['pickUp.services'])
           .catch(function (error) {
             console.error('error requesting game ', error);
           });
+      }).catch(function(error){
+        console.error(error);
       });
     };
 
