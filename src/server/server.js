@@ -22,6 +22,7 @@ console.log(`client directory: ${clientDir}`)
 
 // Auth =======================================================================
 import User from './mongoose/models/users';
+app.use(passport.initialize());
 
 passport.use(new localStrategy(
   function(username, password, done) {

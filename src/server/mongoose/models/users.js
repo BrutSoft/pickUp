@@ -10,5 +10,10 @@ var User = new Schema({
 
 User.plugin(passportLocalMongoose);
 
+User.methods.verifyPassword = function () {
+  console.log('verifying password...');
+  //TODO actually make a verification
+  return true;
+}
 
 module.exports = mongoose.model('users', User);
