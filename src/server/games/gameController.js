@@ -18,7 +18,10 @@ export default {
       startTime: gameReq.time,
       minPlayers: 6,
       playRequests: 1,
-      // locCenter: [coordinates]
+      locCenter: {
+        latitude: gameReq.location.latitude,
+        longitude: gameReq.location.longitude,
+      },
       smsNums: [{
         smsNum: smsNum,
         location: {
@@ -39,8 +42,7 @@ export default {
           }
 
           // if user location within radius of game center
-          let location = req.body.location;
-          if (helpers.isInRange(location, foundGame.locCenter, 10)) {
+          if (helpers.isInRange(gameReq.location, foundGame.locCenter, 10)) {
 
             foundGame.smsNums.push({smsNum: gameReq.smsNum});
             foundGame.playRequests += 1
@@ -48,9 +50,12 @@ export default {
             foundGame.locCenter = helpers.getNewCenterLoc(foundGame.smsNums);
             return Promise.resolve(foundGame);
           }
+          
+          console.log('game not found in range. using newGame');
+          return Promise.resolve(newGame);
 
         } else {
-          console.log('game not found. using newGame ');
+          console.log('game not found in db. using newGame ');
           return Promise.resolve(newGame);
         }
       })

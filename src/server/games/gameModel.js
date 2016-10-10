@@ -6,6 +6,10 @@ const gameSchema = mongoose.Schema({
   startTime: { type: Date },
   minPlayers: 'Number',
   playRequests: 'Number',
+  locCenter: {
+    latitude: 'Number',
+    longitude: 'Number',
+  },
   smsNums: [userSchema]
 });
 
