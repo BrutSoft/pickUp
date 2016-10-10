@@ -38,13 +38,14 @@ passport.use(new localStrategy(
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       if (!user.verifyPassword(password)) { return done(null, false); }
+      console.log('made it past password verification');
       return done(null, user);
     });
   }
 ));
 
 app.post('/register', function(req, res) {
-  User.register(new User({ username: req.body.username }),
+  User.register(new User({ username: req.body.username, password: req.body.password }),
     req.body.password, function(err, account) {
     if (err) {
       return res.status(500).json({
