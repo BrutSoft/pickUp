@@ -16,7 +16,7 @@ export default {
     let newGame = new Game({
       sport: gameReq.sport,
       startTime: gameReq.time,
-      minPlayers: 6,
+      minPlayers: helpers.minPlayers[gameReq.sport],
       playRequests: 1,
       locCenter: {
         latitude: gameReq.location.latitude,
