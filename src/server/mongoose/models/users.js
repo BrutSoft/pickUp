@@ -29,8 +29,6 @@ User.pre('save', function (next) {
 User.methods.verifyPassword = function (candidate) {
   console.log('verifying password...');
   //synch function. TODO refactor all this and server to be async.
-  console.log(candidate);
-  console.log(this.password);
   return bcrypt.compareSync(candidate, this.password);
 }
 

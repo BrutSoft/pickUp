@@ -38,7 +38,6 @@ passport.use(new localStrategy(
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       if (!user.verifyPassword(password)) { return done(null, false); }
-      console.log('made it past password verification');
       return done(null, user);
     });
   }
