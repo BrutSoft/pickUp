@@ -19,6 +19,8 @@ const helpers = {
   hasEnoughPlayers: game => game.playRequests === game.minPlayers,
 
   includesPlayer: (game, smsNum) => game.smsNums.reduce((included, smsObj) => {
+    smsNum = helpers.phone(smsNum);
+    console.log('smsNum = ', smsNum)
     return smsObj.smsNum === smsNum || included;
   }, false),
 
@@ -35,7 +37,9 @@ const helpers = {
   },
 
   getNewCenterLoc: smsNums => {
-    let locations = smsNums.map((smsNum) => smsNum.location);
+    console.log('smsNums', smsNums);
+    let locations = smsNums.map(smsNum => smsNum.location);
+    console.log('locations', locations)
     return geolib.getCenter(locations);
   },
 

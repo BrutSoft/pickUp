@@ -15,7 +15,7 @@ window.helpers = {
   getLocation: function() {
     var options = {
       enableHighAccuracy: true,
-      timeout: 5000,
+      timeout: 35000,
       maximumAge: 0
     };
 	  return new Promise(function(resolve, reject) {
