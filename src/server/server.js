@@ -61,7 +61,8 @@ passport.use(new localStrategy(
 ));
 
 app.post('/register', function(req, res) {
-  User.register(new User({ username: req.body.username, password: req.body.password }),
+  var username = req.body.username.toLowerCase();
+  User.register(new User({ username: username, password: req.body.password }),
     req.body.password, function(err, account) {
     if (err) {
       return res.status(500).json({
