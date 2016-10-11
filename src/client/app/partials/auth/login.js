@@ -26,4 +26,8 @@ angular.module('login', ['pickUpServices']).controller('loginController',
 
     };
 
+    $scope.registerRoute = function () {
+      $location.path('/register');
+    }
+
 }]);
