@@ -10,6 +10,21 @@ var localStrategy = require('passport-local').Strategy;
 const app = express();
 let clientDir = path.join(__dirname, '../../src/client')
 
+// Force HTTPS on Heroku
+ if (app.get('env') === 'production') {
+   app.use(function(req, res, next) {
+     var protocol = req.get('x-forwarded-proto');
+       protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
+   });
+ }
+ // CORS
+ app.use(function(req, res, next) {
+   res.header('Access-Control-Allow-Origin', "*");
+   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+   res.header('Access-Control-Allow-Headers', 'Content-Type');
+   next();
+ });
+
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,13 +35,6 @@ app.use(express.static(clientDir));
 app.post('/api/games', gameController.addRequest)
 console.log(`client directory: ${clientDir}`)
 
-// CORS
-app.use(function(req, res, next) {
-   res.header('Access-Control-Allow-Origin', "*");
-   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-   res.header('Access-Control-Allow-Headers', 'Content-Type');
-   next();
-});
 
 // Auth =======================================================================
 import User from './mongoose/models/users';
