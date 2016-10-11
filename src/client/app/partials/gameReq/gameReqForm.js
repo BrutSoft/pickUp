@@ -46,6 +46,7 @@ angular.module('gameReqForm', ['pickUpServices'])
           .catch(function (error) {
             console.error('error requesting game ', error);
           });
+          
       }).catch(function(error){
         console.error(error);
       });
