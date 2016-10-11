@@ -29,9 +29,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 app.run(function ($rootScope, $location, $state, AuthService, sharedProps) {
   $rootScope.$on('$stateChangeStart',
     function (event, next, current) {
-    if (AuthService.isLoggedIn() === false) {
-      $location.path('/login');
-      sharedProps.set('login');
+      if (next.url !== '/register' && AuthService.isLoggedIn() === false) {
+        $location.path('/login');
+        sharedProps.set('login');
     }
   });
 });
