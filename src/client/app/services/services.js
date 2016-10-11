@@ -66,7 +66,7 @@ angular.module('pickUp.services', [])
         var deferred = $q.defer();
 
         // send a get request to the server
-        $http.get('/user/logout')
+        $http.get('/logout')
           // handle success
           .success(function (data) {
             user = false;
@@ -82,12 +82,12 @@ angular.module('pickUp.services', [])
         return deferred.promise;
 
       },
-      register: function register() {
+      register: function register(username, password) {
         // create a new instance of deferred
         var deferred = $q.defer();
 
         // send a post request to the server
-        $http.post('/user/register',
+        $http.post('/register',
           {username: username, password: password})
           // handle success
           .success(function (data, status) {
