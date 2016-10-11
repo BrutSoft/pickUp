@@ -1,4 +1,4 @@
-angular.module('pickUp', ['ui.router', 'gameReqForm', 'games'])
+angular.module('pickUp', ['ui.router', 'gameReqForm', 'games', 'login'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/index');
@@ -13,6 +13,10 @@ angular.module('pickUp', ['ui.router', 'gameReqForm', 'games'])
       url: '/games',
       templateUrl: 'app/partials/games/games.html',
       controller: 'GamesController'
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'app/partials/auth/login.html',
+      controller: 'loginController'
     });
 });
-  
