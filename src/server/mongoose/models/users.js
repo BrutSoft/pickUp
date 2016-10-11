@@ -26,6 +26,15 @@ User.pre('save', function (next) {
 
 });
 
+User.pre('save', function (next) {
+  var user = this;
+
+  if (!user.isModified('username')) return next();
+
+  user.username = user.username.toLowerCase();
+  next();
+});
+
 User.methods.verifyPassword = function (candidate) {
   console.log('verifying password...');
   //synch function. TODO refactor all this and server to be async.
