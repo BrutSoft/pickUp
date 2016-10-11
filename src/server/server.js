@@ -29,6 +29,7 @@ app.use(function(req, res, next) {
 app.post('/api/games', gameController.addRequest)
 console.log(`client directory: ${clientDir}`)
 
+<<<<<<< 3b745ea1b19dc379b43caea27770c6be0eac38b2
 // // Force HTTPS on Heroku
 // if (app.get('env') === 'production') {
 //   app.use(function(req, res, next) {
@@ -36,6 +37,15 @@ console.log(`client directory: ${clientDir}`)
 //     protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
 //   });
 // }
+=======
+// Force HTTPS on Heroku
+if (app.get('env') === 'production') {
+  app.use(function(req, res, next) {
+    var protocol = req.get('x-forwarded-proto');
+    protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
+  });
+}
+>>>>>>> change order of code
 
 
 // Auth =======================================================================
