@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BrutSoft/pickUp"
+    "url": "git+https://github.com/BrutSoft/pickUp.git"
   },
   "author": "Harvey Sanders & BrutSoft (David d'Aquin, Nathan Donolli, Zivile Januleviciute-Goodwin)",
   "license": "ISC",
