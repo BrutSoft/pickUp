@@ -1,4 +1,4 @@
-angular.module('login', ['pickUp.services']).controller('loginController',
+angular.module('login', ['pickUpServices']).controller('loginController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
 

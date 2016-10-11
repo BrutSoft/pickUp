@@ -1,4 +1,4 @@
-angular.module('games', ['pickUp.services'])
+angular.module('games', ['pickUpServices'])
   .controller('GamesController', function ($scope, sharedProps) {
     $scope.pluralPlayers = false;
     $scope.enoughPlayers = false;

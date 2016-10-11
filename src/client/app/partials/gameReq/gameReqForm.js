@@ -18,7 +18,7 @@ if (rangeStart !== 23) {
   }]
 }
 
-angular.module('gameReqForm', ['pickUp.services'])
+angular.module('gameReqForm', ['pickUpServices'])
 .controller('TimeSelectController', function($scope, $location, GameReq, sharedProps) {
     var gameReq = {};
     $scope.findingLocation = false;

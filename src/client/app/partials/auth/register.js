@@ -1,4 +1,4 @@
-angular.module('register', ['pickUp.services']).controller('registerController',
+angular.module('register', ['pickUpServices']).controller('registerController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
 

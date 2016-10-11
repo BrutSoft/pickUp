@@ -1,4 +1,4 @@
-angular.module('pickUp.services', [])
+angular.module('pickUpServices', [])
 
 .factory('GameReq', function($http) {
   var requestGame = function(gameReq) {
