@@ -45,7 +45,7 @@ angular.module('pickUpServices', [])
       },
       login: function login(username, password) {
         var deferred = $q.defer();
-
+        username = username.toLowerCase();
         $http.post('/login', {username: username, password: password})
           .success(function (data, status) {
             if (status === 200 && data.status){
