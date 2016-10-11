@@ -1,6 +1,6 @@
-angular.module('pickUp', ['ui.router', 'gameReqForm', 'games'])
+var app = angular.module('pickUp', ['ui.router', 'gameReqForm', 'games', 'login', 'register', 'pickUpServices'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/index');
 
   $stateProvider
@@ -13,6 +13,24 @@ angular.module('pickUp', ['ui.router', 'gameReqForm', 'games'])
       url: '/games',
       templateUrl: 'app/partials/games/games.html',
       controller: 'GamesController'
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'app/partials/auth/login.html',
+      controller: 'loginController'
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: 'app/partials/auth/register.html',
+      controller: 'registerController'
     });
 });
-  
+
+app.run(function ($rootScope, $location, $state, AuthService) {
+  $rootScope.$on('$stateChangeStart',
+    function (event, next, current) {
+    if (AuthService.isLoggedIn() === false) {
+      $location.path('/login');
+    }
+  });
+});
