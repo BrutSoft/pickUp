@@ -29,6 +29,7 @@
     "geolib": "^2.0.21",
     "grunt": "1.0.1",
     "grunt-cli": "1.2.0",
+    "load-grunt-tasks": "^3.5.2",
     "moment": "^2.14.1",
     "mongoose": "^4.5.7",
     "morgan": "^1.7.0",
