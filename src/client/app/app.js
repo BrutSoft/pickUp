@@ -26,11 +26,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 });
 
-app.run(function ($rootScope, $location, $state, AuthService) {
+app.run(function ($rootScope, $location, $state, AuthService, sharedProps) {
   $rootScope.$on('$stateChangeStart',
     function (event, next, current) {
     if (AuthService.isLoggedIn() === false) {
       $location.path('/login');
+      sharedProps.set('login');
     }
   });
 });
