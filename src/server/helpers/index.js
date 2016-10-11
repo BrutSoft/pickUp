@@ -40,6 +40,13 @@ const helpers = {
     return geolib.getCenter(locations);
   },
 
+  minPlayers: {
+    soccer: 6,
+    basketball: 6,
+    baseball: 18,
+    football: 10,
+  },
+
 };
 
 export default helpers;
