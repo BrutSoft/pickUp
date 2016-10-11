@@ -27,15 +27,16 @@ angular.module('gameReqForm', ['pickUpServices'])
       console.log('requesting Game');
       $scope.findingLocation = true;
       helpers.getLocation()
-      .then(function(location) {
+      .then(function(response) {
 
+        var loc = response.loc.split(',');
+        gameReq.location = {
+          latitude: loc[0],
+          longitude: loc[1],
+        };
         gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
         gameReq.smsNum = $scope.smsNum;
         gameReq.sport = $scope.sportInput;
-        gameReq.location = {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        };
         console.log(gameReq);
 
         GameReq.requestGame(gameReq)
@@ -46,6 +47,7 @@ angular.module('gameReqForm', ['pickUpServices'])
           .catch(function (error) {
             console.error('error requesting game ', error);
           });
+
       }).catch(function(error){
         console.error(error);
       });
