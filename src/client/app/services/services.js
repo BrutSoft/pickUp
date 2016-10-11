@@ -86,9 +86,12 @@ angular.module('pickUpServices', [])
         // create a new instance of deferred
         var deferred = $q.defer();
 
+        //make username lowercase
+        var userlow = username.toLowerCase();
+
         // send a post request to the server
         $http.post('/register',
-          {username: username, password: password})
+          {username: userlow, password: password})
           // handle success
           .success(function (data, status) {
             if(status === 200 && data.status){
@@ -99,6 +102,7 @@ angular.module('pickUpServices', [])
           })
           // handle error
           .error(function (data) {
+            console.error(data);
             deferred.reject();
           });
 
