@@ -18,5 +18,10 @@ angular.module('pickUp', ['ui.router', 'gameReqForm', 'games', 'login'])
       url: '/login',
       templateUrl: 'app/partials/auth/login.html',
       controller: 'loginController'
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: 'app/partials/auth/register.html',
+      controller: 'registerController'
     });
 });
