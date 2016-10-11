@@ -1,6 +1,6 @@
 {
-  "name": "pickupgame",
-  "version": "1.0.0",
+  "name": "pickupgame/pickupgameMobile",
+  "version": "2.0.0",
   "description": "Organize pick up games without organizing",
   "main": "index.js",
   "scripts": {
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/harveysanders/pickUp.git"
+    "url": "git+https://github.com/BrutSoft/pickUp"
   },
-  "author": "Harvey Sanders",
+  "author": "Harvey Sanders & BrutSoft (David d'Aquin, Nathan Donolli, Zivile Januleviciute-Goodwin)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/harveysanders/pickUp/issues"
+    "url": "https://github.com/BrutSoft/pickUp/issues"
   },
-  "homepage": "https://github.com/harveysanders/pickUp#readme",
+  "homepage": "https://github.com/BrutSoft/pickUp#readme",
   "dependencies": {
     "babel-preset-es2015": "^6.9.0",
     "bcrypt-nodejs": "0.0.3",

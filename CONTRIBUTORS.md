@@ -9,6 +9,7 @@
 * **[BrutSoft](https://github.com/BrutSoft)** (October 2016 fork)
  * **[Zivile Januleviciute Goodwin](https://github.com/zivile777)**
    * Product Owner
+   * Ionic/Cordova mobile app
  * **[David d'Aquin](https://github.com/djdaquin)**
    * Scrum Master
    * Auth, front end and back end.
