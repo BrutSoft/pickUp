@@ -11,4 +11,5 @@
    * Product Owner
  * **[David d'Aquin](https://github.com/djdaquin)**
    * Scrum Master
+   * Auth, front end and back end. 
  * **[Nathan Donolli](https://github.com/ndonolli)**
