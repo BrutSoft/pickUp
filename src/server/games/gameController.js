@@ -63,16 +63,22 @@ export default {
         // check if playRequest > minPlayer
         console.log('player Count: ', game.playRequests);
         if (helpers.hasEnoughPlayers(game)) {
-          // send to all the players
-          helpers.forEachPlayer(game, (num) => {
-            console.log('texting ', num);
-            sms.sendScheduledGame({
-              smsNum: num,
-              sport: gameReq.sport,
-              gameLoc: 'Stallings',
-              gameTime: gameReq.time
-            });
-          })
+          // search google places API for closest rec center
+          helpers.getGameLoc(game.locCenter)
+          .then(function(body) {
+            let data = JSON.parse(body);
+            let results = data.results;
+            // send to all the players
+            helpers.forEachPlayer(game, (num) => {
+              console.log('texting ', num);
+              sms.sendScheduledGame({
+                smsNum: num,
+                sport: gameReq.sport,
+                gameLoc: results[0].name,
+                gameTime: gameReq.time
+              });
+            })
+          }).catch(function(error){console.error(error)})
         }
         return Promise.resolve(game);
       })

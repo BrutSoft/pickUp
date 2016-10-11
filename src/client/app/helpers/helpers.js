@@ -12,6 +12,8 @@ window.helpers = {
     return gameTime;
   },
 
+  // getLocation() is now deprecated on non secure origins
+  // https://developers.google.com/web/updates/2016/04/geolocation-on-secure-contexts-only
   getLocation: function() {
 	  return new Promise(function(resolve, reject) {
       $.getJSON('https://ipinfo.io/geo', resolve);

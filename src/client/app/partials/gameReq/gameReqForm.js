@@ -31,8 +31,8 @@ angular.module('gameReqForm', ['pickUpServices'])
 
         var loc = response.loc.split(',');
         gameReq.location = {
-          latitude: loc[0],
-          longitude: loc[1],
+          latitude: +loc[0],
+          longitude: +loc[1],
         };
         gameReq.time = helpers.createGameTime($scope.data.selectedOption.hour);
         gameReq.smsNum = $scope.smsNum;

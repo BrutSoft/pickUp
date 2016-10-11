@@ -13,3 +13,4 @@
    * Scrum Master
    * Auth, front end and back end. 
  * **[Nathan Donolli](https://github.com/ndonolli)**
+   * Unicorn Wrangler
