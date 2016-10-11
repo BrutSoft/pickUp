@@ -45,7 +45,10 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-shell": "^1.3.0",
     "gruntify-eslint": "^2.0.0",
-    "load-grunt-tasks": "^3.5.0"
+    "load-grunt-tasks": "^3.5.0",
+    "babel-preset-es2015": "^6.9.0",
+    "dotenv": "^2.0.0",
+    "eslint-config-hackreactor": "github:hackreactor-labs/eslint-config-hackreactor"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
